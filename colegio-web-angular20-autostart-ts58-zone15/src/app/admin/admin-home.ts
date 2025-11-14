@@ -1,7 +1,8 @@
 // src/app/admin/admin-home.ts
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../shared/auth.service';
+import { MensajesService } from '../shared/mensajes.service';
 
 @Component({
   standalone: true,
@@ -42,15 +43,44 @@ import { AuthService } from '../shared/auth.service';
       </div>
     </div>
 
+    <!-- Bloque de Mensajes -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card shadow-sm h-100">
+        <div class="card-body d-grid">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="card-title mb-0">Mensajes</h5>
+            <span
+              *ngIf="unreadCount > 0"
+              class="badge rounded-pill bg-danger">
+              {{ unreadCount }}
+            </span>
+          </div>
+          <a class="btn btn-outline-secondary" routerLink="/admin/mensajes">
+            Ver mensajes
+          </a>
+          <small class="text-muted mt-2">
+            Aquí verás las sugerencias y comentarios que envían los usuarios.
+          </small>
+        </div>
+      </div>
+    </div>
+
   </div>
   `
 })
-export class AdminHomeComponent {
+export class AdminHomeComponent implements OnInit {
+
+  unreadCount = 0;
 
   constructor(
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private mensajesSrv: MensajesService
   ) {}
+
+  ngOnInit(): void {
+    this.unreadCount = this.mensajesSrv.contarPendientes();
+  }
 
   logout() {
     this.auth.logout();

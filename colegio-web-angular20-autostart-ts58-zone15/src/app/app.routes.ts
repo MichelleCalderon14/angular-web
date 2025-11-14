@@ -31,12 +31,16 @@ export const routes: Routes = [
         .then(m => m.NoticiasListComponent)
   },
   {
+    path: 'mensajes',
+    loadComponent: () =>
+      import('./features/mensajes/mensajes.page')
+        .then(m => m.MensajesPage)
+  },
+  {
     path: 'login',
     loadComponent: () =>
       import('./shared/login.component').then(m => m.LoginComponent)
   },
-
-  // 🔹 NUEVA RUTA: CONTACTO (pública)
   {
     path: 'contacto',
     loadComponent: () =>
@@ -129,6 +133,14 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/noticias/admin-noticias-delete.page')
         .then(m => m.AdminNoticiasDeletePage)
+  },
+
+  // 🔒 Mensajes para admin
+  {
+    path: 'admin/mensajes',
+    loadComponent: () =>
+      import('./features/mensajes/admin-mensajes.page')
+        .then(m => m.AdminMensajesPage)
   },
 
   // comodín

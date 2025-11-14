@@ -50,6 +50,13 @@ type FontSizeOption = 'small' | 'normal' | 'large' | 'xlarge';
                 </a>
               </li>
 
+              <!-- ⭐ NUEVA PESTAÑA MENSAJES -->
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/mensajes" routerLinkActive="active">
+                  Mensajes
+                </a>
+              </li>
+
               <li class="nav-item">
                 <a class="nav-link" routerLink="/contacto" routerLinkActive="active">
                   Contacto
